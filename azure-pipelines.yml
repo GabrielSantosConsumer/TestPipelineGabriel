@@ -3,9 +3,13 @@
 # Add steps that test, sign, and distribute the app, save build artifacts, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xamarin
 
+trigger:
+- main
+
 jobs:
 
 - job: Android
+
   pool:
     vmImage: 'windows-2019'
 
@@ -36,3 +40,11 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(outputDirectory)'
+      
+  - task: AndroidSigning@3
+    inputs:
+          apkFiles: '**/*.apk'
+          apksignerKeystoreFile: 'Teste'
+          apksignerKeystorePassword: 'teste'
+          apksignerKeystoreAlias: 'Teste'
+          apksignerKeyPassword: 'Teste'
