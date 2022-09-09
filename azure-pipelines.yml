@@ -1,5 +1,6 @@
 # Xamarin.Android and Xamarin.iOS
 
+
 # Build a Xamarin.Android and Xamarin.iOS app.
 # Add steps that test, sign, and distribute the app, save build artifacts, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xamarin
@@ -49,3 +50,11 @@ jobs:
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
+
+  - task: AndroidSigning@3
+    inputs:
+      apkFiles: '**/*.apk'
+      apksignerKeystoreFile: 'GabrielTestes.keystore'
+      apksignerKeystorePassword: '$(key.password)'
+      apksignerKeystoreAlias: 'GabrielTestes'
+      apksignerKeyPassword: '$(key.password)'
