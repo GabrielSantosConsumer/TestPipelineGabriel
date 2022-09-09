@@ -41,10 +41,10 @@ jobs:
     inputs:
       pathtoPublish: '$(outputDirectory)'
       
-  - task: AndroidSigning@3
+  - task: ArchiveFiles@2
     inputs:
-          apkFiles: '**/*.apk'
-          apksignerKeystoreFile: 'Teste'
-          apksignerKeystorePassword: 'teste'
-          apksignerKeystoreAlias: 'Teste'
-          apksignerKeyPassword: 'Teste'
+      rootFolderOrFile: '$(Build.BinariesDirectory)'
+      includeRootFolder: true
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: true
