@@ -21,7 +21,7 @@ namespace AwesomeApp
         private void Button_Clicked(object sender, EventArgs e)
         {
             count++;
-            ((Button)sender).Text = $"You clicked {count} times.";
+            ((Button)sender).Text = $"teste clicked {count} times.";
         }
     }
 }
