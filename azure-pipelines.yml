@@ -58,3 +58,8 @@ jobs:
       apksignerKeystorePassword: '$(key.password)'
       apksignerKeystoreAlias: 'GabrielTestes'
       apksignerKeyPassword: '$(key.password)'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/myAndroidApp/bin/$(buildConfiguration)'
+      Contents: '*.aab'
+      TargetFolder: 'drop'
