@@ -58,13 +58,10 @@ jobs:
       apksignerKeystorePassword: '$(key.password)'
       apksignerKeystoreAlias: 'GabrielTestes'
       apksignerKeyPassword: '$(key.password)'
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: 'msbuild -restore $(Build.SourcesDirectory)/myAndroidApp/*.csproj -t:SignAndroidPackage -p:AndroidPackageFormat=aab -p:Configuration=$(buildConfiguration) -p:AndroidKeyStore=True -p:AndroidSigningKeyStore=$(keyStore.secureFilePath) -p:AndroidSigningStorePass=$(keystore.password) -p:AndroidSigningKeyAlias=$(key.alias) -p:AndroidSigningKeyPass=$(key.password)'
-    
   - task: CopyFiles@2
     inputs:
-        SourceFolder: '$(Build.SourcesDirectory)/myAndroidApp/bin/$(buildConfiguration)'
-        Contents: '*.aab'
-        TargetFolder: 'drop'
+      contents: '**/*.apk'
+      targetFolder: '$(build.artifactStagingDirectory)'
+  - task: PublishBuildArtifacts@1
+    
+    
